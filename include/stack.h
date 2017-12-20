@@ -29,7 +29,7 @@ public:
 	void Push(const sType &a);// Положить элемент на вершину стека
 	sType Pop();// Доступ к вершине стека с удалением 
 	sType Peek() const;	// Доступ к вершине стека без удаления
-	bool IsEmpty() const { return Top == 0; };// Стек пуст
+	bool IsEmpty() const { return Top == -1; };// Стек пуст
 	void Clean(); //очистка стека
 	bool operator==(const TStack &st) const; //перегрузка сравнения
 	TStack & operator=(const TStack &st); //перегрузка присваивания
@@ -99,7 +99,7 @@ sType TStack<sType>::Peek() const
 template<class sType>
 void TStack<sType>::Clean() //очистка стека
 {
-	Top = 0;
+	Top = -1;
 }/*-------------------------------------------------------------------------*/
 
 template<class sType>

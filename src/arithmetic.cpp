@@ -59,12 +59,6 @@ Lexem::Lexem(const char c)
 		break;
 
 	}
-	/*if (c >= 97 && c <= 122 || c >= 65 && c <= 90)
-	{
-	type = VARIABLE;;
-	//val =  0;
-	Op = c;
-	}*/
 
 }
 
@@ -108,7 +102,7 @@ arithmetic::arithmetic(const string& str)
 
 void arithmetic::Divition()
 {
-	for (unsigned int i = 0; i < expr.length(); i++)
+	for (int i = 0; i < expr.length(); i++)
 	{
 		char c = expr[i];
 		if ((c == '*') || (c == '/') || (c == '+') || (c == '-') || (c == ')') || (c == '('))
@@ -120,15 +114,15 @@ void arithmetic::Divition()
 		else
 			if (isdigit(c))
 			{
-				string EXP;
+				string Num;
 				int j = i;
 				int t = expr.length();
 				while ((j < t) && ((isdigit(expr[j])) || expr[j] == '.'))
 				{
 					j++;
 				}
-				EXP = expr.substr(i, j - i);
-				pLex[nLex] = Lexem(EXP);
+				Num = expr.substr(i, j - i);
+				pLex[nLex] = Lexem(Num);
 				nLex++;
 				i = j - 1;
 			}
@@ -196,7 +190,8 @@ void arithmetic::ConvertToPolish()
 				{
 					t = st.Pop();
 					polishLex[j++] = t;
-					t = st.Peek();
+					if(!st.IsEmpty())
+					 t = st.Peek();
 				}
 				st.Push(pLex[i]);
 			}
@@ -345,7 +340,7 @@ double arithmetic::Result()
 				res = l + r;
 				break;
 			case '-':
-				res = l - r;
+				res = r - l;
 				break;
 			case '*':
 				res = l * r;

@@ -22,6 +22,15 @@ struct Lexem
 	Lexem(const Lexem &t);// конструктор копировани€
 	Lexem& operator=(const Lexem &t);// перегрузка =
 									 //void inpVar();
+
+	bool operator==(const Lexem &t) const
+	{
+		bool res = false;
+		if ((type == t.type) && (Op == t.Op) && (Val == t.Val))
+			res = true;
+		return res;
+	}
+
 	~Lexem() { };
 };
 // конвертаци€ в double функци€ stod(): http://www.cplusplus.com/reference/string/stod/
@@ -49,13 +58,19 @@ public:
 	double Result(); // вычисление по польской записи. ¬ход - массив polishlex, nPolishLex, выход - double ответ
 	Lexem* GetLexems() { return pLex; }
 	int GetNLex() { return nLex; }
+
+	Lexem* GetPolish() { return polishLex; }
+	int GetNPolish() { return nPolishLex; }
+
 	void Minus()
 	{
 		if (expr[0] == '-')
 			expr = "0" + expr;
 		for (int i = 1; i < expr.length(); i++)
-			if (expr[i - 1] == '(' && expr[i] == '-')
+		{
+			if ((expr[i - 1] == '(') && (expr[i] == '-'))
 				expr.insert(i, "0");
+		}
 		delete[] pLex;
 		pLex = new Lexem[expr.length()];
 	}

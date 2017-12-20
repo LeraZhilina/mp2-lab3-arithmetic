@@ -1,4 +1,4 @@
-/*// тесты для стека
+// тесты для стека
 
 #include "stack.h"
 #include <gtest.h>
@@ -48,7 +48,7 @@ TYPED_TEST(StackTest, throws_when_create_stack_with_negative_length)
 {
 	ASSERT_NO_THROW(TStack<(int)T> st1(st2));
 }*/
-/*TYPED_TEST(StackTest, can_push_element)
+TYPED_TEST(StackTest, can_push_element)
 {
 	EXPECT_EQ(10, st1.GetTop());
 }
@@ -62,7 +62,7 @@ TYPED_TEST(StackTest, can_get_size)
 	TStack st(st2);
 	EXPECT_EQ(st, st2);
 }*/
-/*TYPED_TEST(StackTest, can_check_emptiness)
+TYPED_TEST(StackTest, can_check_emptiness)
 {
 	EXPECT_NE(true, st1.IsEmpty());
 }
@@ -80,4 +80,3 @@ TYPED_TEST(StackTest, can_pop_element)
 	st.Pop();
 	EXPECT_EQ(1, st.GetTop());
 }
-*/
