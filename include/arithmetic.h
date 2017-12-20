@@ -49,5 +49,15 @@ public:
 	double Result(); // вычисление по польской записи. Вход - массив polishlex, nPolishLex, выход - double ответ
 	Lexem* GetLexems() { return pLex; }
 	int GetNLex() { return nLex; }
+	void Minus()
+	{
+		if (expr[0] == '-')
+			expr = "0" + expr;
+		for (int i = 1; i < expr.length(); i++)
+			if (expr[i - 1] == '(' && expr[i] == '-')
+				expr.insert(i, "0");
+		delete[] pLex;
+		pLex = new Lexem[expr.length()];
+	}
 
 };

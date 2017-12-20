@@ -26,6 +26,7 @@ int main()
 			cin >> Exp;
 			arithmetic A(Exp);
 			A.Clrspace();
+			A.Minus();
 			A.Divition();
 			if (A.Check() == true)
 			{
