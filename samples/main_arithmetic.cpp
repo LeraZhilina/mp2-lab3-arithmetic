@@ -8,7 +8,7 @@ using namespace std;
 int main()
 {
 	string Exp;
-	int p=1;
+	int p = 1;
 	int a;
 	cout << "CALCULATE\n";
 	cout << "Choose:\n";
@@ -31,7 +31,7 @@ int main()
 			{
 				A.ConvertToPolish();
 				double res = A.Result();
-				cout <<'='<< res << endl;
+				cout << '=' << res << endl;
 			}
 		}
 		break;

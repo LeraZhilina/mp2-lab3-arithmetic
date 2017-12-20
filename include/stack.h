@@ -25,12 +25,11 @@ public:
 	TStack(const TStack<sType> &s);// Конструктор копирования
 	~TStack();			
 	int GetSize() { return Size;}//Размер стека
-	int GetTop() { return Top;}//Индекс последнего занятого в stMem
+	int GetTop() { return Top+1;}//Индекс последнего занятого в stMem
 	void Push(const sType &a);// Положить элемент на вершину стека
 	sType Pop();// Доступ к вершине стека с удалением 
 	sType Peek() const;	// Доступ к вершине стека без удаления
 	bool IsEmpty() const { return Top == 0; };// Стек пуст
-	bool IsFull() const { return Top == Size; };// Стек полон
 	void Clean(); //очистка стека
 	bool operator==(const TStack &st) const; //перегрузка сравнения
 	TStack & operator=(const TStack &st); //перегрузка присваивания
@@ -41,7 +40,7 @@ TStack<sType>::TStack(int s) : Size(s)
 {
 	if (s >= 0)
 	{
-		Top = 0;
+		Top = -1;
 		StMem = new sType[Size];
 	}
 	else
@@ -67,9 +66,9 @@ TStack<sType>::TStack(const TStack<sType> &s)
 template<class sType> // Положить элемент на вершину стека
 void TStack<sType>::Push(const sType &a)
 {
-	if (Top==Size && Top==Size-1)
+	if (Top==Size-1)
 	{
-		Size *= 1,5;
+		Size *= 2;
 		sType* temp = new sType[Size];
 		for (int i = 0; i < Top + 1; i++)
 			temp[i] = StMem[i];

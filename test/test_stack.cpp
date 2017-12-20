@@ -1,4 +1,4 @@
-// тесты для стека
+/*// тесты для стека
 
 #include "stack.h"
 #include <gtest.h>
@@ -40,19 +40,15 @@ TYPED_TEST(StackTest, can_create_stack)
 {
 	ASSERT_NO_THROW(st1);
 }
-TYPED_TEST(StackTest, can_check_for_completeness)
-{
-	EXPECT_EQ(true, st2.IsFull());
-}
 TYPED_TEST(StackTest, throws_when_create_stack_with_negative_length)
 {
 	ASSERT_ANY_THROW(TStack<int> st(-10));
 }
 /*TYPED_TEST(StackTest, can_create_copied_stack)
 {
-	ASSERT_NO_THROW(TStack<int> st1(st2));
+	ASSERT_NO_THROW(TStack<(int)T> st1(st2));
 }*/
-TYPED_TEST(StackTest, can_push_element)
+/*TYPED_TEST(StackTest, can_push_element)
 {
 	EXPECT_EQ(10, st1.GetTop());
 }
@@ -61,12 +57,12 @@ TYPED_TEST(StackTest, can_get_size)
 	EXPECT_EQ(10, st1.GetSize());
 	EXPECT_EQ(20, st3.GetSize());
 }
-/*TEST(TStack, copied_stack_is_equal_to_source_one)
+/*TYPED_TEST(StackTest, copied_stack_is_equal_to_source_one)
 {
-	TStack<int> st(st2);
+	TStack st(st2);
 	EXPECT_EQ(st, st2);
 }*/
-TYPED_TEST(StackTest, can_check_emptiness)
+/*TYPED_TEST(StackTest, can_check_emptiness)
 {
 	EXPECT_NE(true, st1.IsEmpty());
 }
@@ -76,10 +72,7 @@ TYPED_TEST(StackTest, can_clean_stack)
 	EXPECT_EQ(true, st1.IsEmpty());
 }
 
-
-/*
-
-TEST(TStack, can_pop_element)
+TYPED_TEST(StackTest, can_pop_element)
 {
 	TStack<int> st(2);
 	st.Push(1);

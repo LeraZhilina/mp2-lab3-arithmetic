@@ -6,7 +6,7 @@
 
 using namespace std;
 
-enum LexemType { NUMBER, OPERATOR, LBRACKET, RBRACKET, VARIABLE,UNKNOWN };
+enum LexemType { NUMBER, OPERATOR, LBRACKET, RBRACKET, VARIABLE, UNKNOWN };
 
 const string AllOperators = "(+-*/)";
 
@@ -21,7 +21,7 @@ struct Lexem
 	Lexem(const string& str);
 	Lexem(const Lexem &t);// конструктор копирования
 	Lexem& operator=(const Lexem &t);// перегрузка =
-	//void inpVar();
+									 //void inpVar();
 	~Lexem() { };
 };
 // конвертация в double функция stod(): http://www.cplusplus.com/reference/string/stod/
@@ -35,8 +35,8 @@ private:
 	Lexem* polishLex; // польская запись в виде массива термов
 	int nPolishLex; // число термов в польской записи
 
-	
-	public:
+
+public:
 	void Divition(); // обходим входнуюю строку и разбиваем ее на массив Lexem, здесь же определяем их кол-во.
 	void ConvertToPolish(); // вход - массив terms, nTerms; выход - массив polishTerms, nPolishTerms
 	void Clrspace();							//Удаление пробелов
@@ -45,8 +45,9 @@ private:
 	bool Check_opers() const;					//Проверка на пропущенные операции/операнды
 	bool Check();
 	arithmetic(const string& str);
-	~arithmetic() { delete[] pLex;}
+	~arithmetic() { delete[] pLex; }
 	double Result(); // вычисление по польской записи. Вход - массив polishlex, nPolishLex, выход - double ответ
-	
-	
+	Lexem* GetLexems() { return pLex; }
+	int GetNLex() { return nLex; }
+
 };

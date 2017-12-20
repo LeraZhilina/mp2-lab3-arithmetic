@@ -1,4 +1,4 @@
-// реализация функций и классов для вычисления арифметических выражений
+п»ї// Г°ГҐГ Г«ГЁГ§Г Г¶ГЁГї ГґГіГ­ГЄГ¶ГЁГ© ГЁ ГЄГ«Г Г±Г±Г®Гў Г¤Г«Гї ГўГ»Г·ГЁГ±Г«ГҐГ­ГЁГї Г Г°ГЁГґГ¬ГҐГІГЁГ·ГҐГ±ГЄГЁГµ ГўГ»Г°Г Г¦ГҐГ­ГЁГ©
 #include <iostream>
 #include "arithmetic.h"
 #include <string>
@@ -22,7 +22,7 @@ Lexem::Lexem(const char c)
 	}
 	case ')':
 	{
-		type =RBRACKET;
+		type = RBRACKET;
 		Val = 0;
 		Op = '0';
 		break;
@@ -61,9 +61,9 @@ Lexem::Lexem(const char c)
 	}
 	/*if (c >= 97 && c <= 122 || c >= 65 && c <= 90)
 	{
-		type = VARIABLE;;
-		//val =  0;
-		Op = c;
+	type = VARIABLE;;
+	//val =  0;
+	Op = c;
 	}*/
 
 }
@@ -91,12 +91,12 @@ Lexem& Lexem::operator=(const Lexem &t)
 	Op = t.Op;
 	return *this;
 }/*-------------------------------------------------------------------------*/
-/*void Lexem::inpVar()
-{
-	cout << "Input VARIABLE " << Op << " : ";
-	cin >> Val;
-	cout << endl;
-}*/
+ /*void Lexem::inpVar()
+ {
+ cout << "Input VARIABLE " << Op << " : ";
+ cin >> Val;
+ cout << endl;
+ }*/
 
 
 arithmetic::arithmetic(const string& str)
@@ -221,8 +221,13 @@ bool arithmetic::Check_symbols() const
 	{
 		if (pLex[i].type == UNKNOWN)
 		{
-			res = false;
 			cout << "  " << "UNKNOWN symbol" << endl;
+			res = false;
+		}
+		if ((pLex[i].type == VARIABLE) && (pLex[i + 1].type == VARIABLE))
+		{
+			cout << "UNKNOWN SYMBOL in " << i << endl;
+			res = false;
 		}
 	}
 	return res;
@@ -253,7 +258,7 @@ bool arithmetic::Check_opers() const
 			cout << "\n" << "Operations error" << endl;
 			res = false;
 		}
-		if (cur == LBRACKET && ((next == OPERATOR && pLex[i + 1].Val != 2) || next == RBRACKET))
+		if (cur == LBRACKET && ((pLex[i + 1].type != NUMBER) || (pLex[i + 1].type !=RBRACKET) || pLex[i + 1].Op != '-'))
 		{
 			cout << "  " << "Operations error" << endl;
 			return false;
@@ -300,16 +305,16 @@ bool arithmetic::Check()
 	if (expr.length() > 0)
 	{
 		bool sim, op, br;
-		
+
 		sim = Check_symbols();
 		op = Check_opers();
 		br = Check_brackets();
-		res= (sim && op && br);
+		res = (sim && op && br);
 	}
 	else
 	{
 		cout << "This string is empty";
-		res= false;
+		res = false;
 	}
 	return res;
 }/*-------------------------------------------------------------------------*/
@@ -353,5 +358,5 @@ double arithmetic::Result()
 		}
 	}
 	return st.Pop();
-			
+
 }/*-------------------------------------------------------------------------*/
