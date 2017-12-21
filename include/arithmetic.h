@@ -30,7 +30,13 @@ struct Lexem
 			res = true;
 		return res;
 	}
-
+	bool operator!=(const Lexem &t) const
+	{
+		bool res = false;
+		if ((type != t.type) || (Op != t.Op) || (Val != t.Val))
+			res = true;
+		return res;
+	}
 	~Lexem() { };
 };
 // конвертация в double функция stod(): http://www.cplusplus.com/reference/string/stod/

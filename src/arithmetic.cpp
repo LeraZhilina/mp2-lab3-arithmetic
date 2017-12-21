@@ -231,46 +231,59 @@ bool arithmetic::Check_symbols() const
 bool arithmetic::Check_opers() const
 {
 	bool res = true;
-	LexemType cur = pLex[0].type;
-	LexemType next = cur;
 
-	for (int i = 0; i<(nLex - 1); i++)
+	if ((pLex[0].type == NUMBER || pLex[0].type == LBRACKET || pLex[0].type == VARIABLE || pLex[0].Op == '-') && (pLex[nLex - 1].type == NUMBER || pLex[nLex - 1].type == RBRACKET || pLex[nLex - 1].type == VARIABLE))
 	{
-		next = pLex[i + 1].type;
-		if ((cur == NUMBER || cur == VARIABLE) && (next == NUMBER || next == VARIABLE || next == LBRACKET))
+		for (int i = 0; i < (nLex - 1); i++)
 		{
-			cout << "\n" << "Operations error" << endl;
-			res = false;
+			switch (pLex[i].type)
+			{
+			case NUMBER:
+				if ((pLex[i + 1].type != RBRACKET) && (pLex[i + 1].type != OPERATOR))
+				{
+					res = false;
+					cout << "Operator error "<<endl;
+				}
+				break;
+			case VARIABLE:
+				if ((pLex[i + 1].type != RBRACKET) && (pLex[i + 1].type != OPERATOR))
+				{
+					res = false;
+					cout << "Operator error " << endl;
+				}
+				break;
+			case OPERATOR:
+				if ((pLex[i + 1].type != NUMBER) && (pLex[i + 1].type != VARIABLE) && (pLex[i + 1].type != LBRACKET))
+				{
+					res = false;
+					cout << "Operator error " << endl;
+				}
+				break;
+			case LBRACKET:
+				if ((pLex[i + 1].type != NUMBER) && pLex[i + 1].type != VARIABLE && (pLex[i + 1].type != LBRACKET) && pLex[i + 1].Op != '-')  //&& (pLexem[i + 1].type != CLOSE_BRACKET)
+				{
+					res = false;
+					cout << "Operator error " << endl;
+				}
+				break;
+			case RBRACKET:
+				if ((pLex[i + 1].type != RBRACKET) && (pLex[i + 1].type != OPERATOR))
+				{
+					res = false;
+					cout << "Operator error " << endl;
+				}
+				break;
+			}
 		}
+	}
+	else
+	{
+		res = false;
+		cout << "Operator error " << endl;
+	}
 
-		if (cur == OPERATOR && (next == OPERATOR || next == RBRACKET))
-		{
-			cout << "\n" << "Operations error" << endl;
-			res = false;
-		}
-		if (cur == RBRACKET && (next != OPERATOR && next != RBRACKET))
-		{
-			cout << "\n" << "Operations error" << endl;
-			res = false;
-		}
-		if (cur == LBRACKET && ((pLex[i + 1].type != NUMBER) || (pLex[i + 1].type !=RBRACKET) || pLex[i + 1].Op != '-'))
-		{
-			cout << "  " << "Operations error" << endl;
-			return false;
-		}
-		cur = next;
-	}
-	if (next == LBRACKET || next == OPERATOR)
-	{
-		cout << "\n" << "Operations error" << endl;
-		res = false;
-	}
-	if (pLex[0].type != NUMBER &&  pLex[0].type != VARIABLE  &&  pLex[0].type != LBRACKET   &&    pLex[0].Val != 2)
-	{
-		cout << "\n" << "Operations error" << endl;
-		res = false;
-	}
 	return res;
+	
 }/*-------------------------------------------------------------------------*/
 
 bool arithmetic::Check_brackets() const
